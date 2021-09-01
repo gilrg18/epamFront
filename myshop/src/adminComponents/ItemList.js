@@ -4,11 +4,7 @@ import UpdateModal from '../modalComponents/UpdateModal'
 import '../css/itemList.css'
 
 const ItemList = (props) => {
-    const { itemID, itemName, itemDescription, price, itemImage } = props;
-    const fetchItems = async () => {
-        const items = await Api.getItems();
-        props.setItems(items);
-    }
+    const { itemID, itemName, itemDescription, price, itemImage, setItems } = props;
 
     return (
         <>
@@ -21,8 +17,7 @@ const ItemList = (props) => {
                     <UpdateModal setItems={props.setItems} itemID={itemID} />
                     
                     <button type="button" className="space btn btn-danger rounded-pill" onClick={() => {
-                        Api.deleteItem(itemID)
-                        fetchItems()
+                        Api.deleteItem(itemID, setItems)
                     }
                     }>Delete</button>
                 </td>

@@ -15,14 +15,16 @@ class Api {
     };
 
 
-    deleteItem = async (itemID) => {
-        if (1 <= itemID && itemID <= 4) {
+    deleteItem = async (itemID, setItems) => {
+        if (1 <= itemID && itemID <= 35) {
             Toasts.error('This item cannot be deleted')
         } else {
             // await fetch(`/myItems/items/${itemID}`, {
             await fetch(` https://epam-shop.herokuapp.com/myItems/items/${itemID}`, {
                 method: 'DELETE'
             });
+            const items = await this.getItems();
+            setItems(items);
             Toasts.sucess(`Item with id ${itemID} has been deleted`)
         }
     };
